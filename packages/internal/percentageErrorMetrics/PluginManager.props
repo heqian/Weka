@@ -1,2 +1,0 @@
-# Specify new plugin Evaluation metrics
-weka.classifiers.evaluation.AbstractEvaluationMetric=weka.classifiers.evaluation.RootMeanSquarePercentageError,weka.classifiers.evaluation.MeanAbsolutePercentageError

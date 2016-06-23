@@ -1,5 +1,0 @@
-weka.classifiers.functions.activation.ActivationFunction =\
- weka.classifiers.functions.activation
-
-weka.classifiers.functions.loss.LossFunction =\
- weka.classifiers.functions.loss

@@ -1,8 +1,0 @@
-# Mappings for classes to be handled in the GenericObjectEditor
-
-# activation functions
-weka.classifiers.functions.activation.ActivationFunction=weka.gui.GenericObjectEditor
-
-# loss functions
-weka.classifiers.functions.loss.LossFunction=weka.gui.GenericObjectEditor
-
