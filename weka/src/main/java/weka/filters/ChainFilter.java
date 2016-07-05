@@ -50,7 +50,7 @@ public class ChainFilter extends Filter {
 		Vector<Option> result = new Vector<Option>(2);
 
 		result.addElement(new Option("\tSet the order of chain.", "N", 1, "-N <order>"));
-		result.addElement(new Option("\tSet whether attributes should be included in order.", "F", 1, "-F"));
+		result.addElement(new Option("\tSet whether attributes should be included in order.", "F", 0, "-F"));
 
 		return result.elements();
 	}
@@ -178,9 +178,7 @@ public class ChainFilter extends Filter {
 	 *             if something goes wrong
 	 */
 	public boolean setInputFormat(Instances instanceInfo) throws Exception {
-
 		super.setInputFormat(instanceInfo);
-		setOutputFormat(instanceInfo);
 		return true;
 	}
 
@@ -204,13 +202,8 @@ public class ChainFilter extends Filter {
 			m_NewBatch = false;
 		}
 
-		if (isFirstBatchDone()) {
-			push(instance);
-			return true;
-		} else {
-			bufferInput(instance);
-			return false;
-		}
+		bufferInput(instance);
+		return false;
 	}
 
 	/**
@@ -227,16 +220,14 @@ public class ChainFilter extends Filter {
 			throw new IllegalStateException("No input instance format defined");
 		}
 
-		if (!isFirstBatchDone()) {
-			Instances data = getInputFormat();
-			Instances result = convertInstancesWithOrder(data, getOrder(), getIncludeAttributesInOrder());
-			for (int i = 0; i < result.numInstances(); i++)
-				push(result.instance(i));
-		}
+		Instances data = getInputFormat();
+		Instances result = convertInstancesWithOrder(data, getOrder(), getIncludeAttributesInOrder());
+		for (int i = 0; i < result.numInstances(); i++)
+			push(result.instance(i));
+
 		flushInput();
 
 		m_NewBatch = true;
-		m_FirstBatchDone = true;
 		return (numPendingOutput() != 0);
 	}
 
