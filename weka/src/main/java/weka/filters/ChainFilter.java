@@ -179,7 +179,7 @@ public class ChainFilter extends Filter {
 	 */
 	public boolean setInputFormat(Instances instanceInfo) throws Exception {
 		super.setInputFormat(instanceInfo);
-		return true;
+		return false;
 	}
 
 	/**
